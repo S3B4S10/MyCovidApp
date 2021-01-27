@@ -54,10 +54,8 @@ private static final int RC_SIGN_IN=1;
         });
     }
     private void signIn(AuthUI.IdpConfig provedor){
-
         Intent signInIntent=AuthUI.getInstance().createSignInIntentBuilder().setAvailableProviders(Collections.singletonList(provedor)).build();
         startActivityForResult(signInIntent, RC_SIGN_IN);
-
     }
 
     @Override
@@ -71,7 +69,6 @@ private static final int RC_SIGN_IN=1;
                 // Successfully signed in
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 Toast.makeText(this,"Bienvenido@ ${user!!.displayname}",Toast.LENGTH_LONG).show();
-
 
                 db.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -93,33 +90,24 @@ private static final int RC_SIGN_IN=1;
                                     startActivity(new Intent(getApplicationContext(), TomaDeDecisionesMain.class));
                                     finish();
                                     break;
-
                             }
                         }else {
                             if (snapshot.child("Users").child(user.getUid()).exists()) {
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(intent);
                                 db.child("Users").child(user.getUid()).child("PersonalInfo").child("proveedor").setValue(provider);
-
-
                             } else {
                                 Intent intent = new Intent(LoginActivity.this, UsersData.class);
                                 startActivity(intent);
-
                             }
                             finish();
                         }
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-
                     }
                 });
-
-
             } else {
-
                 Toast.makeText(this,"Error encontrado ${response!!.getError()!!.getErrorCode()!!}",Toast.LENGTH_LONG).show();
                 // Sign in failed. If response is null the user canceled the
                 // sign-in flow using the back button. Otherwise check

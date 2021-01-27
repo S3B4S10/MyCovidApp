@@ -26,8 +26,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class HospitalMain extends AppCompatActivity {
-  private   Button btn_Users;
-  private   Button btn_Consultar;
+  private Button btn_Users;
+  private Button btn_Consultar;
   private Button btn_search;
   private EditText txt_consul;
   private ListView listUsers;
